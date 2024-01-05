@@ -511,7 +511,7 @@ getFast <- function(ensembl_transcript_id,attributes = "all",build){
   if (attributes %in% c("5utr","3utr","strand","start","stop","ensembl_gene_id","name","all")){
     section <- get(buildname)[which(get(buildname)$ensembl_transcript_id == ensembl_transcript_id),]
     if (nrow(section) == 0) {
-      warning("Ensembl transcript not found")
+      warning(paste0("Ensembl transcript ",ensembl_transcript_id," not found/not protein coding."))
       return(outputlist)
     }
     if (build == "38"){
