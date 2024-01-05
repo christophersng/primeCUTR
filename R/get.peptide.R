@@ -13,7 +13,7 @@
 #' get.peptide("ENST00000539214","c.-61C>T",build = 38,check_startgains = TRUE)
 get.peptide <- function(ensembl_transcript_id, nuc_change, build = 38, check_startgains = F){
 
-  peptides_msg <- c()
+  pep.env$peptides_msg <- c()
 
   changes <- extractNucChange(nuc_change) #parse the hgvs variation
 
@@ -47,8 +47,8 @@ get.peptide <- function(ensembl_transcript_id, nuc_change, build = 38, check_sta
   }
 
   if(is.na(sequence)){
-    peptides_msg <<- paste0(peptides_msg,"Incompatible CDS positions (",nuc_change,"). ")
-    return(output)
+    pep.env$peptides_msg <- paste0(pep.env$peptides_msg,"Incompatible CDS positions (",nuc_change,"). ")
+    return(c(output,peptides_msg = pep.env$peptides_msg))
   }
 
   #read the wt DNA sequence
@@ -58,17 +58,17 @@ get.peptide <- function(ensembl_transcript_id, nuc_change, build = 38, check_sta
   check_sequence <- function(wt_sequence,return_warning = TRUE){
     if(is.null(wt_sequence)){
       if(return_warning==TRUE){
-        peptides_msg <<- paste0(peptides_msg,"Transcript ",ensembl_transcript_id," not found")
+        pep.env$peptides_msg <- paste0(pep.env$peptides_msg,"Transcript ",ensembl_transcript_id," not found")
       }
       return(FALSE)
     } else if (nchar(wt_sequence)<abs(changes$start)||nchar(wt_sequence)<abs(changes$stop)){
       if(return_warning==TRUE){
-        peptides_msg <<- paste0(peptides_msg,"Mutation position ",changes$start," not found in ",sequence," sequence. ")
+        pep.env$peptides_msg <- paste0(pep.env$peptides_msg,"Mutation position ",changes$start," not found in ",sequence," sequence. ")
       }
       return(FALSE)
     } else if (str_detect(changes$wt,"[TCGA]+")&&changes$wt!=str_sub(wt_sequence,changes$start,changes$stop)){
       if(return_warning==TRUE){
-        peptides_msg <<- paste0(peptides_msg,"CDS supplied is incorrect: ",changes$wt," vs ",str_sub(wt_sequence,changes$start,changes$stop),". ")
+        pep.env$peptides_msg <- paste0(pep.env$peptides_msg,"CDS supplied is incorrect: ",changes$wt," vs ",str_sub(wt_sequence,changes$start,changes$stop),". ")
       }
       return(FALSE)
     } else {return(TRUE)}
@@ -77,7 +77,7 @@ get.peptide <- function(ensembl_transcript_id, nuc_change, build = 38, check_sta
   if(build==37){
     runcheck <- check_sequence(wt_sequence,TRUE)
     if(runcheck==F){
-      return(output)
+      return(c(output,peptides_msg = pep.env$peptides_msg))
     }
   }
 
@@ -89,9 +89,9 @@ get.peptide <- function(ensembl_transcript_id, nuc_change, build = 38, check_sta
 
     recheck <- check_sequence(wt_sequence,TRUE)
     if(recheck==FALSE){
-      return(output)
+      return(c(output,peptides_msg = pep.env$peptides_msg))
     } else {
-      peptides_msg <<- paste0(peptides_msg,"Build 37 used.")
+      pep.env$peptides_msg <- paste0(pep.env$peptides_msg,"Build 37 used.")
     }
   }
 
@@ -147,7 +147,7 @@ get.peptide <- function(ensembl_transcript_id, nuc_change, build = 38, check_sta
     #special case, stoploss
     if(nchar(mut_sequence)-changes$stop<=2&&
        !str_detect(peptide.seq,"\\*")){
-      peptides_msg <<- paste0(peptides_msg,"Stop loss detected. ")
+      pep.env$peptides_msg <- paste0(pep.env$peptides_msg,"Stop loss detected. ")
       neoStart <- ceiling((changes$start+correction)/3)
       frameshift = T #i.e. tell get.peptide to extend the ORF
     }
@@ -197,8 +197,8 @@ get.peptide <- function(ensembl_transcript_id, nuc_change, build = 38, check_sta
     atg_start <- utr_start+str_locate(mut_segment, "ATG")[1]-3
 
     if(is.na(atg_start)){
-      peptides_msg <<- paste0(peptides_msg,"No ATG gain: ",mut_segment,". ")
-      return(output)
+      pep.env$peptides_msg <- paste0(pep.env$peptides_msg,"No ATG gain: ",mut_segment,". ")
+      return(c(output,peptides_msg = pep.env$peptides_msg))
     }
 
     utr_mut_seq <- str_sub(mut_sequence,atg_start)
@@ -246,7 +246,7 @@ get.peptide <- function(ensembl_transcript_id, nuc_change, build = 38, check_sta
       wt_context <- paste0(str_sub(wt_sequence,-3),str_sub(wt_coding,1,4))
 
       check_startgain_res$wt_kz <- kozak_strength(wt_context)
-    } else {peptides_msg <<- paste0(peptides_msg,"Unable to check native Kozak strength: ",ensembl_transcript_id,". ")}
+    } else {pep.env$peptides_msg <- paste0(pep.env$peptides_msg,"Unable to check native Kozak strength: ",ensembl_transcript_id,". ")}
 
     #Comparing to other uORFs
     #Other WT ATGs forming potential uORFs
@@ -409,11 +409,11 @@ get.peptide <- function(ensembl_transcript_id, nuc_change, build = 38, check_sta
 
   }
 
-  return(output)
+  return(c(output,peptides_msg = pep.env$peptides_msg))
 
 }
 
-# Helper --------------------
+# Helpers --------------------
 extractNucChange <- function(hgvs){
   #07/02/2023 added to deal with blanks in some nc transcripts
   if(is.na(hgvs)|hgvs==""){
@@ -455,7 +455,6 @@ extractNucChange <- function(hgvs){
     warning(paste0("Unrecognised sequence change: ",hgvs))
     return(list(start = "",stop = "",wt = "",mut = ""))}
 }
-
 
 readPeptide <- function(sequence,report = TRUE){
 
@@ -589,7 +588,7 @@ next.orf <- function(peptide,sequence,where,transcript,build){
 
   next_step <- steps[grep(where,steps)+1]
   numberleft_over <- as.numeric(str_extract(peptide,"\\d"))
-  peptides_msg <<- paste0(peptides_msg,"ORF reaches ",next_step,". ")
+  pep.env$peptides_msg <- paste0(pep.env$peptides_msg,"ORF reaches ",next_step,". ")
 
   if (numberleft_over == 0){
     tail_bp = ""
@@ -615,7 +614,7 @@ next.orf <- function(peptide,sequence,where,transcript,build){
   }
 
   if (next_step == "coding"&numberleft_over == 0){
-    peptides_msg <<- paste0(peptides_msg,"ORF is in-frame. ")
+    pep.env$peptides_msg <- paste0(pep.env$peptides_msg,"ORF is in-frame. ")
     next_peptide <- unlist(getFast(as.character(transcript),"peptide",build))
     return(paste0(str_remove(peptide,"\\(\\+[012]bp\\)"),next_peptide))
   }
@@ -624,7 +623,7 @@ next.orf <- function(peptide,sequence,where,transcript,build){
 
   #sometimes transcripts are missing UTR data
   if (length(next_sequence)==0){
-    peptides_msg <<- paste0(peptides_msg,"No ",next_step," sequence available for ",transcript,". ")
+    pep.env$peptides_msg <- paste0(pep.env$peptides_msg,"No ",next_step," sequence available for ",transcript,". ")
     return("")
   }
 
@@ -635,3 +634,7 @@ next.orf <- function(peptide,sequence,where,transcript,build){
   return(next.orf(combined_peptide,next_sequence,next_step,transcript,build))
 
 }
+
+pep.env <- new.env(parent = emptyenv())
+
+pep.env$peptides_msg <- c()
