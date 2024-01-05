@@ -29,14 +29,16 @@ In order to process an entire .vcf file of somatic mutations, use [_get.orfs_](.
 
 ```R
 #two example VCF files are bundled with this package as can be accessed like so:
-input_vcf <- primeCUTR_example("vep_HCC1937.vcf")
-get.orfs(input_vcf,"./output_dir/",build=38)
+input_vcf_path <- primeCUTR_example("vep_HCC1937.vcf")
+#OR
+input_vcf_path <- primeCUTR_example("vep_MCF-7.vcf")
 
-input_vcf <- primeCUTR_example("vep_MCF-7.vcf")
-get.orfs(input_vcf,"./output_dir/",build=38)
+#Run the function
+get.orfs(input_vcf_path,"./output_dir/",build=38)
 ```
 
-Note that the VCF files for input to PrimeCUTR are dependent on VEP-annotation with the `--hgvs` flag option selected. For example:
+Note that the VCF files for input to PrimeCUTR are dependent on VEP-annotation 
+(https://www.ensembl.org/info/docs/tools/vep/index.html) with the `--hgvs` flag option selected. For example:
 
 ```Bash
 vep \
@@ -52,6 +54,10 @@ vep \
 --input_file $vcf \
 --output_file $output_file
 ```
+
+For small batches of somatic mutation data, Ensembl VEP online is freely accessible to all users at: https://www.ensembl.org/Tools/VEP.
+Simply ensure that the `HGVS` option is checked.
+
 
 ## Dependencies
 PrimeCUTR relies on the following R packages:
