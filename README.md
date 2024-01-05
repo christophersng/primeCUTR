@@ -1,5 +1,5 @@
 # PrimeCUTR: Neopeptide Prediction from Somatic Mutations
-PrimeCUTR is an R package designed for predicting neopeptides from somatic mutation calls in cancer genomic sequencing data (Sng et al., 2024 - under peer-review). The package includes functionality for identifying start-gain, stop-loss, missense, and frameshift mutations. It requires Variant Effect Predictor (VEP) annotated variant call format (VCF) files as input and produces neopeptide sequences suitable for downstream analysis, such as MHC binding prediction using tools like netMHC.
+PrimeCUTR is an R package designed for predicting neopeptides from somatic mutation calls in cancer genomic sequencing data (Sng et al., 2024 - under peer-review). The package includes functionality to handle start-gain, stop-loss, missense, and frameshift mutations. It requires Variant Effect Predictor (VEP) annotated variant call format (VCF) files as input and produces neopeptide sequences suitable for downstream analysis, such as MHC binding prediction using tools like netMHC.
 
 ## Installation
 To install PrimeCUTR, you can use the following commands in R:
