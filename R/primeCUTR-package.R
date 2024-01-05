@@ -9,4 +9,7 @@
 #' @importFrom Biostrings getSeq
 ## usethis namespace: end
 
+utils::globalVariables(c("POS","context","orflength","pep","peptides_msg",
+                         "start","tail",".","read.delim","write.table"))
+
 NULL
