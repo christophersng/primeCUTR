@@ -21,7 +21,7 @@ get.peptide(
 \item{check_startgains}{Performs checks of kozak strength, checks for overlapping WT uORF or in-frame overlap with coding sequence}
 }
 \value{
-A data frame
+A list containing predicted neoORF and metadata
 }
 \description{
 Predicts the neopeptide produced for a given mutation and transcript combination

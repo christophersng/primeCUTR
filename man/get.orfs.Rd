@@ -18,6 +18,8 @@ get.orfs(
 
 \item{output}{Output path}
 
+\item{build}{Reference genome - 37 or 38}
+
 \item{filter}{Filter vcf FILTER column by a string match e.g. "PASS". Default: NULL}
 
 \item{patient}{String for patient ID. Default: NULL - will take basename of vcf file}

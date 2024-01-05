@@ -6,14 +6,12 @@
 #' @param build Which reference genome to use. Defaults to GRCh38.
 #' @param check_startgains Performs checks of kozak strength, checks for overlapping WT uORF or in-frame overlap with coding sequence
 #'
-#' @return A data frame
+#' @return A list containing predicted neoORF and metadata
 #' @export
 #'
 #' @examples
 #' get.peptide("ENST00000539214","c.-61C>T",build = 38,check_startgains = TRUE)
 get.peptide <- function(ensembl_transcript_id, nuc_change, build = 38, check_startgains = F){
-
-  pep.env$peptides_msg <- c()
 
   changes <- extractNucChange(nuc_change) #parse the hgvs variation
 
@@ -637,4 +635,4 @@ next.orf <- function(peptide,sequence,where,transcript,build){
 
 pep.env <- new.env(parent = emptyenv())
 
-pep.env$peptides_msg <- c()
+pep.env$peptides_msg <- ""

@@ -111,7 +111,6 @@ get.orfs <- function(single_input,output,build,filter=NULL,patient=NULL,study_id
         this.transcript <- extracted[row,]
 
         #reset all
-        peptides_msg <<- ""
         this.orf <- ""
         peptide.normal.ends <- ""
         peptide.tryptic.ends <- ""
@@ -129,6 +128,8 @@ get.orfs <- function(single_input,output,build,filter=NULL,patient=NULL,study_id
 
           #Make a unique identifier
           key <- paste0(patient,"--",this.transcript$hgnc_symbol,"--",this.transcript[identifier],"--",this.transcript$CHROM,":",this.transcript$Start,":",":",this.transcript$REF,":",this.transcript$ALT,"--",this.transcript$nuc_change,"--mutant-sequence")
+
+          print(key)
 
           #Progress bar
           cat(paste0("\r",group_name," - [",
@@ -191,7 +192,7 @@ get.orfs <- function(single_input,output,build,filter=NULL,patient=NULL,study_id
               peptide.tryptic.ends = peptide.tryptic.ends,
               peptide.normal.ends = peptide.normal.ends,
               pass = pass,
-              peptides_msg = peptides_msg,
+              peptides_msg = this.peptide$peptides_msg,
               wt_kz = this.peptide$wt_kz,
               mut_kz = this.peptide$mut_kz,
               relative_strength_native = this.peptide$relative_strength_native,
@@ -212,7 +213,7 @@ get.orfs <- function(single_input,output,build,filter=NULL,patient=NULL,study_id
               peptide.tryptic.ends = peptide.tryptic.ends,
               peptide.normal.ends = peptide.normal.ends,
               pass = pass,
-              peptides_msg))
+              peptides_msg = this.peptide$peptides_msg))
           }
 
         }
