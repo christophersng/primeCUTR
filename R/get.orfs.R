@@ -129,8 +129,6 @@ get.orfs <- function(single_input,output,build,filter=NULL,patient=NULL,study_id
           #Make a unique identifier
           key <- paste0(patient,"--",this.transcript$hgnc_symbol,"--",this.transcript[identifier],"--",this.transcript$CHROM,":",this.transcript$Start,":",":",this.transcript$REF,":",this.transcript$ALT,"--",this.transcript$nuc_change,"--mutant-sequence")
 
-          print(key)
-
           #Progress bar
           cat(paste0("\r",group_name," - [",
                      paste(rep("=",ceiling(row/nrow(extracted)*70)),collapse=""),
