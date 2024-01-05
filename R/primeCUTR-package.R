@@ -4,9 +4,9 @@
 ## usethis namespace: start
 #' @import dplyr
 #' @import stringr
-#' @import BSgenome.Hsapiens.UCSC.hg19
-#' @import BSgenome.Hsapiens.UCSC.hg38
-#' @import Biostrings
+#' @importFrom BSgenome.Hsapiens.UCSC.hg19 BSgenome.Hsapiens.UCSC.hg19
+#' @importFrom BSgenome.Hsapiens.UCSC.hg38 BSgenome.Hsapiens.UCSC.hg38
+#' @importFrom Biostrings getSeq
 ## usethis namespace: end
 
 NULL

@@ -19,6 +19,7 @@ Imports:
     BSgenome.Hsapiens.UCSC.hg19,
     BSgenome.Hsapiens.UCSC.hg38,
     dplyr,
-    stringr
+    stringr,
+    Biostrings
 Depends: 
     R (>= 2.10)
