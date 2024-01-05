@@ -13,6 +13,8 @@
 #' get.peptide("ENST00000539214","c.-61C>T",build = 38,check_startgains = TRUE)
 get.peptide <- function(ensembl_transcript_id, nuc_change, build = 38, check_startgains = F){
 
+  pep.env$peptides_msg <- ""
+
   changes <- extractNucChange(nuc_change) #parse the hgvs variation
 
   sequence <- NA
