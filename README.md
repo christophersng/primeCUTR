@@ -16,7 +16,7 @@ devtools::install_github("christophersng/primeCUTR")
 To use PrimeCUTR, load the package in your R script or R Markdown document:
 
 ```R
-library(PrimeCUTR)
+library(primeCUTR)
 ```
 
 The key function in PrimeCUTR is [_get.peptide_](./man/get.peptide.Rd) which can be used interactively in R to obtain the neopeptide and metadata for a given transcript and mutation combination. 
