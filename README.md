@@ -19,13 +19,15 @@ To use PrimeCUTR, load the package in your R script or R Markdown document:
 library(primeCUTR)
 ```
 <br>
-The key function in PrimeCUTR is [**_get.peptide_**](./man/get.peptide.Rd) which can be used interactively in R to obtain the neopeptide and metadata for a given transcript and mutation combination. 
+
+The key function in PrimeCUTR is **_get.peptide_** which can be used interactively in R to obtain the neopeptide and metadata for a given transcript and mutation combination. 
 
 ```R
 get.peptide("ENST00000539214","c.-61C>T",build = 38,check_startgains = TRUE)
 ```
 <br>
-In order to process an entire .vcf file of somatic mutations, use [**_get.orfs_**](./man/get.orfs.Rd):
+
+In order to process an entire .vcf file of somatic mutations, use **_get.orfs_**:
 
 ```R
 #two example VCF files are bundled with this package as can be accessed like so:
