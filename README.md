@@ -89,6 +89,7 @@ Optional (for start-gains only), if `check_startgain=T`
 <br>
 <sup>✝</sup>Calculated per the schema in Whiffin, Nicola, et al. "Characterising the loss-of-function impact of 5’untranslated region variants in 15,708 individuals." Nature communications 11.1 (2020): 2523.
 <br>
+<br>
 
 **_get.orfs_** produces 3 output folders in the designated `output` folder.<br>
 (Run `?get.peptide` for more information on input arguments and usage of the function.)
