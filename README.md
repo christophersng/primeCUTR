@@ -39,7 +39,7 @@ input_vcf_path <- primeCUTR_example("vep_MCF-7.vcf")
 get.orfs(input_vcf_path,"./output_dir/",build=38)
 ```
 <br>
-A wrapper R script can be found [here](https://github.com/christophersng/primeCUTR_scripts) for simple loop batch running of multiple .vcf files in a folder.
+A wrapper R script can be found here (https://github.com/christophersng/primeCUTR_scripts) for simple loop batch running of multiple .vcf files in a folder.
 
 Note that the VCF files for input to PrimeCUTR are dependent on VEP-annotation 
 (https://www.ensembl.org/info/docs/tools/vep/index.html) with the `--hgvs` flag option selected. For example:
@@ -144,4 +144,5 @@ PrimeCUTR is licensed under GPL (>= 3). See the LICENSE file for more details.
 Contributions and feedback on PrimeCUTR are welcome. If you encounter issues or have suggestions for improvements, please open an issue.
 
 ## Citation
-Sng CCT, Kallor AA, Simpson BS, Bedran G, Alfaro J, Litchfield K. Untranslated regions (UTRs) are a potential novel source of neoantigens for personalised immunotherapy. Frontiers in Immunology. 2024 Mar 15;15:1347542.
+Sng CCT, Kallor AA, Simpson BS, Bedran G, Alfaro J, Litchfield K. Untranslated regions (UTRs) are a potential novel source of neoantigens for personalised immunotherapy. _Frontiers in Immunology_. 2024 Mar 15;15:1347542.
+https://www.frontiersin.org/journals/immunology/articles/10.3389/fimmu.2024.1347542/full
