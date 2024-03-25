@@ -144,4 +144,4 @@ PrimeCUTR is licensed under GPL (>= 3). See the LICENSE file for more details.
 Contributions and feedback on PrimeCUTR are welcome. If you encounter issues or have suggestions for improvements, please open an issue.
 
 ## Citation
-Sng CCT, et al. (2024) Untranslated regions (UTRs) are a potential novel source of neoantigens for personalised immunotherapy. Frontiers in Immunology (in-press) 
+Sng CCT, Kallor AA, Simpson BS, Bedran G, Alfaro J, Litchfield K. Untranslated regions (UTRs) are a potential novel source of neoantigens for personalised immunotherapy. Frontiers in Immunology. 2024 Mar 15;15:1347542.
