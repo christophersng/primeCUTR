@@ -1,5 +1,5 @@
 # PrimeCUTR: Neopeptide Prediction from Somatic Mutations
-PrimeCUTR is an R package designed for predicting neopeptides from somatic mutation calls in cancer genomic sequencing data (Sng et al., 2024 - under peer-review). The package includes functionality to handle start-gain, stop-loss, missense, and frameshift mutations. It requires Variant Effect Predictor (VEP) annotated variant call format (VCF) files as input and produces neopeptide sequences suitable for downstream analysis, such as MHC binding prediction using tools like netMHC.
+PrimeCUTR is an R package designed for predicting neopeptides from somatic mutation calls in cancer genomic sequencing data (Sng et al., 2024). The package includes functionality to handle start-gain, stop-loss, missense, and frameshift mutations. It requires Variant Effect Predictor (VEP) annotated variant call format (VCF) files as input and produces neopeptide sequences suitable for downstream analysis, such as MHC binding prediction using tools like netMHC.
 
 ## Installation
 To install PrimeCUTR, you can use the following commands in R:
@@ -39,7 +39,7 @@ input_vcf_path <- primeCUTR_example("vep_MCF-7.vcf")
 get.orfs(input_vcf_path,"./output_dir/",build=38)
 ```
 <br>
-A wrapper R script can be found [here](https://github.com/christophersng/primeCUTR_scripts) for simple loop batch running of multiple .vcf files in a folder.
+A wrapper R script can be found here (https://github.com/christophersng/primeCUTR_scripts) for simple loop batch running of multiple .vcf files in a folder.
 
 Note that the VCF files for input to PrimeCUTR are dependent on VEP-annotation 
 (https://www.ensembl.org/info/docs/tools/vep/index.html) with the `--hgvs` flag option selected. For example:
@@ -88,6 +88,7 @@ Optional (for start-gains only), if `check_startgain=T`
 
 <br>
 <sup>✝</sup>Calculated per the schema in Whiffin, Nicola, et al. "Characterising the loss-of-function impact of 5’untranslated region variants in 15,708 individuals." Nature communications 11.1 (2020): 2523.
+<br>
 <br>
 
 **_get.orfs_** produces 3 output folders in the designated `output` folder.<br>
@@ -141,3 +142,7 @@ PrimeCUTR is licensed under GPL (>= 3). See the LICENSE file for more details.
 
 ## Contribution
 Contributions and feedback on PrimeCUTR are welcome. If you encounter issues or have suggestions for improvements, please open an issue.
+
+## Citation
+Sng CCT, Kallor AA, Simpson BS, Bedran G, Alfaro J, Litchfield K. Untranslated regions (UTRs) are a potential novel source of neoantigens for personalised immunotherapy. _Frontiers in Immunology_. 2024 Mar 15;15:1347542.
+https://www.frontiersin.org/journals/immunology/articles/10.3389/fimmu.2024.1347542/full
